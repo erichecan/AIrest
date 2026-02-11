@@ -1,0 +1,161 @@
+{
+    "name": "Congee Queen AI Order Taker (Bilingual)",
+    "transcriber": {
+        "provider": "deepgram",
+        "model": "nova-2",
+        "language": "multi"
+    },
+    "model": {
+        "provider": "openai",
+        "model": "gpt-4o",
+        "messages": [
+            {
+                "role": "system",
+                "content": "# IDENTITY\nYou are the AI order taker for **Congee Queen (Markham)**.\nYou speak fluent English and Chinese (Mandarin).\n\n# LANGUAGE RULES\n1. Detect the user's language.\n2. Reply IN THE SAME LANGUAGE.\n3. If unsure, ask: 'English or Chinese?'\n\n# SHEPHERD METHOD (A.A.P.)\nIf user goes off-topic:\n1. ACKNOWLEDGE (e.g., 'Yes, parking is free.')\n2. ANSWER briefly.\n3. PIVOT back to ordering (e.g., 'Now, what would you like to order?').\n\n# TOOLS\n- ALWAYS use `search_menu` to find items first.\n- Use `add_item` only when user confirms.\n- Use `get_order_summary` before `submit_order`.\n- If 2 failed searches or user asks for human -> `transfer_to_human`."
+            }
+        ],
+        "tools": [
+            {
+                "type": "function",
+                "function": {
+                    "name": "search_menu",
+                    "description": "Search for menu items by name or keyword.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "query": {
+                                "type": "string",
+                                "description": "The dish name or keyword (e.g., 'lobster congee', '龙虾粥')."
+                            },
+                            "lang": {
+                                "type": "string",
+                                "enum": [
+                                    "en",
+                                    "zh"
+                                ],
+                                "description": "Language of the query."
+                            }
+                        },
+                        "required": [
+                            "query"
+                        ]
+                    }
+                },
+                "server": {
+                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "add_item",
+                    "description": "Add an item to the cart.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "item_id": {
+                                "type": "string",
+                                "description": "The exact item ID from search results."
+                            },
+                            "qty": {
+                                "type": "integer",
+                                "description": "Quantity to add.",
+                                "default": 1
+                            },
+                            "notes": {
+                                "type": "string",
+                                "description": "Special instructions (e.g., 'no spicy')."
+                            }
+                        },
+                        "required": [
+                            "item_id"
+                        ]
+                    }
+                },
+                "server": {
+                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_order_summary",
+                    "description": "Get a summary of the current cart with totals.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "lang": {
+                                "type": "string",
+                                "enum": [
+                                    "en",
+                                    "zh"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "lang"
+                        ]
+                    }
+                },
+                "server": {
+                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "submit_order",
+                    "description": "Finalize and submit the order.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "payment_method": {
+                                "type": "string",
+                                "enum": [
+                                    "pay_at_store",
+                                    "pay_by_link"
+                                ],
+                                "default": "pay_at_store"
+                            }
+                        }
+                    }
+                },
+                "server": {
+                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "transfer_to_human",
+                    "description": "Transfer call to a human agent.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "reason": {
+                                "type": "string"
+                            },
+                            "lang": {
+                                "type": "string",
+                                "enum": [
+                                    "en",
+                                    "zh"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "server": {
+                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                }
+            }
+        ]
+    },
+    "voice": {
+        "provider": "11labs",
+        "voiceId": "sarah",
+        "model": "eleven_multilingual_v2"
+    },
+    "firstMessage": "Hello, welcome to Congee Queen! 你好，欢迎致电皇后名粥！How can I help you today? 请问要点什么？",
+    "serverUrl": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+}

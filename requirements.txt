@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+rapidfuzz
+twilio
+python-dotenv
+requests
+psycopg2-binary

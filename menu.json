@@ -1,0 +1,132 @@
+{
+    "restaurant_info": {
+        "name_en": "Congee Queen (Markham)",
+        "name_zh": "皇后名粥",
+        "tax_rate": 0.13,
+        "currency": "CAD"
+    },
+    "items": [
+        {
+            "id": "congee_001",
+            "category": "Super Bowl Congee",
+            "name_en": "Lobster Super Bowl Congee",
+            "name_zh": "生滾龍蝦窩粥",
+            "price": 29.75,
+            "keywords": [
+                "lobster",
+                "super bowl",
+                "congee",
+                "long xia",
+                "da zhou",
+                "龙虾",
+                "大粥"
+            ]
+        },
+        {
+            "id": "congee_002",
+            "category": "Super Bowl Congee",
+            "name_en": "House Super Bowl Congee",
+            "name_zh": "皇后大粥",
+            "price": 23.25,
+            "keywords": [
+                "house",
+                "super bowl",
+                "congee",
+                "huang hou",
+                "queen",
+                "皇后"
+            ]
+        },
+        {
+            "id": "congee_003",
+            "category": "Super Bowl Congee",
+            "name_en": "Seafood Super Bowl Congee",
+            "name_zh": "海鮮大粥",
+            "price": 22.00,
+            "keywords": [
+                "seafood",
+                "super bowl",
+                "hai xian",
+                "海鲜"
+            ]
+        },
+        {
+            "id": "rice_001",
+            "category": "Rice",
+            "name_en": "Empress Fried Rice (Eel, Fish Roe & Crab Meat)",
+            "name_zh": "皇太子鰻魚炒飯",
+            "price": 22.00,
+            "keywords": [
+                "empress",
+                "fried rice",
+                "eel",
+                "unagi",
+                "crab",
+                "huang tai zi",
+                "man yu",
+                "炒饭",
+                "鳗鱼"
+            ]
+        },
+        {
+            "id": "rice_002",
+            "category": "Rice",
+            "name_en": "Spicy Softshell Crab Fried Rice",
+            "name_zh": "香辣軟殼蟹炒飯",
+            "price": 22.00,
+            "keywords": [
+                "spicy",
+                "softshell crab",
+                "fried rice",
+                "ruan ke xie",
+                "xiang la",
+                "软壳蟹"
+            ]
+        },
+        {
+            "id": "rice_003",
+            "category": "Rice",
+            "name_en": "Yeung Chow Fried Rice (Shrimp & BBQ Pork)",
+            "name_zh": "楊州炒飯",
+            "price": 17.00,
+            "keywords": [
+                "yeung chow",
+                "yang zhou",
+                "bbq pork",
+                "shrimp",
+                "fried rice",
+                "扬州炒饭"
+            ]
+        },
+        {
+            "id": "thai_001",
+            "category": "Thai Fusion",
+            "name_en": "Thai Style Green Mango Salad",
+            "name_zh": "泰式青芒果沙律",
+            "price": 14.75,
+            "keywords": [
+                "thai",
+                "green mango",
+                "salad",
+                "mang guo",
+                "sha lv",
+                "芒果沙拉"
+            ]
+        },
+        {
+            "id": "thai_002",
+            "category": "Thai Fusion",
+            "name_en": "House Pad Thai (Shrimp & Chicken)",
+            "name_zh": "皇后泰式炒河",
+            "price": 21.00,
+            "keywords": [
+                "pad thai",
+                "shrimp",
+                "chicken",
+                "chao he",
+                "thai noodles",
+                "泰式炒河"
+            ]
+        }
+    ]
+}
