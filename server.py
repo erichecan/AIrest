@@ -32,10 +32,11 @@ logger = logging.getLogger("Vapi-Restaurant")
 app = FastAPI(title="Vapi Restaurant Backend")
 
 # --- Configuration ---
-DB_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://neondb_owner:npg_uUTzYB6Awd3q@ep-withered-pond-aibgxrga-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require",
-)
+# --- Configuration ---
+raw_db_url = os.getenv("DATABASE_URL", "")
+if not raw_db_url:
+    raw_db_url = "postgresql://neondb_owner:npg_uUTzYB6Awd3q@ep-withered-pond-aibgxrga-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require"
+DB_URL = raw_db_url
 
 if DB_URL.startswith("postgresql+asyncpg://"):
     DB_URL = DB_URL.replace("postgresql+asyncpg://", "postgresql://")
