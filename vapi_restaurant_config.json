@@ -1,4 +1,5 @@
 {
+    "id": "389556c2-c9b4-4623-b771-f0f0ea73b7c4",
     "name": "Congee Queen AI Order Taker (Bilingual)",
     "transcriber": {
         "provider": "deepgram",
@@ -42,7 +43,7 @@
                     }
                 },
                 "server": {
-                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
                 }
             },
             {
@@ -73,7 +74,7 @@
                     }
                 },
                 "server": {
-                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
                 }
             },
             {
@@ -98,7 +99,7 @@
                     }
                 },
                 "server": {
-                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
                 }
             },
             {
@@ -121,7 +122,7 @@
                     }
                 },
                 "server": {
-                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
                 }
             },
             {
@@ -146,7 +147,156 @@
                     }
                 },
                 "server": {
-                    "url": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "execute_nl_command",
+                    "description": "Execute a natural-language configuration command for routing, hours, menu, recommendation, and order queries.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "description": "Natural-language command from the merchant."
+                            },
+                            "tenant_id": {
+                                "type": "string",
+                                "description": "Tenant identifier. Defaults to tenant_default if omitted."
+                            },
+                            "restaurant_id": {
+                                "type": "integer",
+                                "description": "Restaurant identifier. Defaults to configured restaurant if omitted."
+                            },
+                            "actor_id": {
+                                "type": "string",
+                                "description": "Operator identifier, e.g. owner."
+                            },
+                            "source": {
+                                "type": "string",
+                                "description": "Command source, e.g. chat or voice."
+                            },
+                            "language": {
+                                "type": "string",
+                                "enum": [
+                                    "en",
+                                    "zh"
+                                ],
+                                "description": "Preferred response language."
+                            },
+                            "confirm": {
+                                "type": "boolean",
+                                "description": "Set true to confirm high-risk changes."
+                            },
+                            "dry_run": {
+                                "type": "boolean",
+                                "description": "Set true to parse and preview without applying."
+                            }
+                        },
+                        "required": [
+                            "text"
+                        ]
+                    }
+                },
+                "server": {
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "undo_last_config_change",
+                    "description": "Undo the last applied configuration change (or a specific change_id).",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "tenant_id": {
+                                "type": "string",
+                                "description": "Tenant identifier."
+                            },
+                            "restaurant_id": {
+                                "type": "integer",
+                                "description": "Restaurant identifier."
+                            },
+                            "actor_id": {
+                                "type": "string",
+                                "description": "Operator identifier, e.g. owner."
+                            },
+                            "source": {
+                                "type": "string",
+                                "description": "Action source, e.g. chat or voice."
+                            },
+                            "change_id": {
+                                "type": "string",
+                                "description": "Optional specific config change ID to rollback."
+                            }
+                        }
+                    }
+                },
+                "server": {
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "query_orders",
+                    "description": "Query orders with filters and return list/count/sum for exception-driven checks.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "tenant_id": {
+                                "type": "string",
+                                "description": "Tenant identifier."
+                            },
+                            "restaurant_id": {
+                                "type": "integer",
+                                "description": "Restaurant identifier."
+                            },
+                            "filters": {
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "description": "Order statuses, e.g. pending, confirmed, failed."
+                                    },
+                                    "from": {
+                                        "type": "string",
+                                        "description": "Start datetime (ISO-8601)."
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "description": "End datetime (ISO-8601)."
+                                    },
+                                    "has_transfer": {
+                                        "type": "boolean",
+                                        "description": "Optional transfer flag filter."
+                                    }
+                                }
+                            },
+                            "aggregation": {
+                                "type": "string",
+                                "enum": [
+                                    "list",
+                                    "count",
+                                    "sum"
+                                ],
+                                "description": "Result aggregation mode."
+                            },
+                            "limit": {
+                                "type": "integer",
+                                "description": "Maximum rows to return for list mode."
+                            }
+                        }
+                    }
+                },
+                "server": {
+                    "url": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
                 }
             }
         ]
@@ -157,5 +307,5 @@
         "model": "eleven_multilingual_v2"
     },
     "firstMessage": "Hello, welcome to Congee Queen! 你好，欢迎致电皇后名粥！How can I help you today? 请问要点什么？",
-    "serverUrl": "https://tambra-nondeformed-torturously.ngrok-free.dev/webhook"
+    "serverUrl": "https://vapi-restaurant-backend-465934989199.us-central1.run.app/webhook"
 }
